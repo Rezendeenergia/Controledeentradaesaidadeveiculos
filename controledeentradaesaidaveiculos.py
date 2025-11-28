@@ -529,10 +529,12 @@ def main():
                 '%d/%m/%Y %H:%M') if 'data_chegada' in display_data.columns else None
             display_data['tempo_viagem'] = display_data['tempo_viagem'].round(0).astype('Int64')
             display_data['km_rodados'] = display_data['km_rodados'].astype('Int64')
+            display_data['km_inicial'] = display_data['km_inicial'].astype('Int64')
+            display_data['km_final'] = display_data['km_final'].astype('Int64')
 
         st.dataframe(
             display_data[['motorista', 'placa', 'modelo', 'data_saida', 'data_chegada',
-                          'km_rodados', 'tempo_viagem', 'finalidade', 'status']],
+                          'km_inicial', 'km_final', 'km_rodados', 'tempo_viagem', 'finalidade', 'status']],
             use_container_width=True,
             column_config={
                 'motorista': 'Motorista',
@@ -540,6 +542,8 @@ def main():
                 'modelo': 'Modelo',
                 'data_saida': 'Data/Hora Saída',
                 'data_chegada': 'Data/Hora Chegada',
+                'km_inicial': st.column_config.NumberColumn('KM Inicial', format='%d'),
+                'km_final': st.column_config.NumberColumn('KM Final', format='%d'),
                 'km_rodados': st.column_config.NumberColumn('KM Rodados', format='%d'),
                 'tempo_viagem': st.column_config.NumberColumn('Tempo (min)', format='%d'),
                 'finalidade': 'Finalidade',
